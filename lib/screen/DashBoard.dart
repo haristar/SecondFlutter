@@ -7,17 +7,23 @@ class DashBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Dashboard".toUpperCase()),
-          backgroundColor: Colors.green,
+      //backgroundColor: Colors.lightBlue,
+      appBar: AppBar(
+        title: Text("Dashboard".toUpperCase()),
+        backgroundColor: Colors.white10,
+      ),
+      body: Center(
+        child: IconButton(
+          icon: Icon(
+            Icons.alt_route_rounded,
+          ),
+          onPressed: () {},
+          iconSize: 100.0,
+          splashColor: Colors.red,
+          highlightColor: Colors.cyan,
         ),
-        body: Center(
-            child: Image.asset(
-          "images/krishnaimage.jpg",
-          width: 300,
-          height: 560,
-          alignment: Alignment.center,
-        )));
+      ),
+    );
   }
 }
 
