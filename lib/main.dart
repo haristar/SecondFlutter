@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screen/Home.dart';
 import 'screen/DashBoard.dart';
+import 'screen/AppBarr.dart';
 
 void main() => runApp(const MyApp());
 
@@ -13,6 +14,6 @@ class MyApp extends StatelessWidget {
         title: "Third App",
         themeMode: ThemeMode.system,
         debugShowCheckedModeBanner: false,
-        home: Home());
+        home: AppBarr());
   }
 }
