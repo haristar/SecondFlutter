@@ -1,49 +1,29 @@
 import 'package:flutter/material.dart';
 
 class AppBarr extends StatelessWidget {
-  const AppBarr({super.key});
+   const AppBarr({super.key});
+
+  static const List<String> products = ["SOFA","BED","CHAIR"];
+  static const List<String> productDetails = ["6-face Sofa", "Master Bed","4-Person Chair"];
+  static const List<num> price = [8000.0,5000.0,2000.0];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-          child: ListView(
-            itemExtent: 100.0,
-            //padding: EdgeInsets.all(10.0),
-            reverse: false,
-            scrollDirection: Axis.vertical,
-            //shrinkWrap: true,
-            children: [
-              ListTile(
-                leading: CircleAvatar(child: Icon(Icons.alarm_on,size: 30.0,),backgroundColor: Colors.brown,),
-                title: Text("ALARM"),
-                subtitle: Text("Morning"),
-                trailing: Icon(Icons.add),
-                onTap: (){},
-              ),
-              ListTile(
-                leading: CircleAvatar(child: Icon(Icons.shopping_cart,size: 30.0,),backgroundColor: Colors.brown,),
-                title: Text("SHOPPING"),
-                subtitle: Text("Groceries"),
-                trailing: Icon(Icons.add),
-                onTap: (){},
-              ),
-              ListTile(
-                leading: CircleAvatar(child: Icon(Icons.backup,size: 30.0,),backgroundColor: Colors.brown,),
-                title: Text("BACKUP"),
-                subtitle: Text("Weekly"),
-                trailing: Icon(Icons.add),
-                onTap: (){},
-              ),
-              ListTile(
-                leading: CircleAvatar(child: Icon(Icons.wallet,size: 30.0,),backgroundColor: Colors.brown,),
-                title: Text("SAVING"),
-                subtitle: Text("Statement"),
-                trailing: Icon(Icons.add),
-                onTap: (){},
-              )
-            ],
-          ),
-    ));
+      body: Container(
+        child: ListView.builder(
+          itemCount : products.length,
+          itemExtent: 100.0,
+          itemBuilder: (context,index){
+            return ListTile(
+              leading: CircleAvatar(child : Text(products[index][0])),
+              title: Text(products[index]),
+              subtitle: Text(productDetails[index]),
+              trailing: Text(price[index].toString()),onTap: (){},
+            );
+          },
+        ),
+      ),
+    );
   }
 }
