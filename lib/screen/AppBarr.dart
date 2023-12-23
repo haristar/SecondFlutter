@@ -8,42 +8,53 @@ class AppBarr extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: false,
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.menu),color: Colors.white,
-          onPressed: () {},
-        ),
-        title: Text("HOME",style: TextStyle(color: Colors.white),),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.shopping_cart),color: Colors.white,
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.search),color: Colors.white,
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.book),color: Colors.white,
-            onPressed: () {},
-          ),
-        ],
-        elevation: 0,
-        backgroundColor: Colors.amberAccent,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(0)),
-        ),
-        flexibleSpace: Image.network(
-          "https://images.pexels.com/photos/1585325/pexels-photo-1585325.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        fit: BoxFit.fill,),
+        title: Text("ROWS AND COLUMNS"),
+        centerTitle: true,
       ),
-      body: Center(
+      body: Container(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Flutter Application Development",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.pinkAccent)),
-            Text("half the way"),
+            Row(
+              children: [
+                Expanded(child: Image(image: AssetImage("images/krishnaimage.jpg"),width: 120.0,)),
+                Expanded(flex:2,child: Image(image: AssetImage("images/krishnaimage.jpg"),width: 120.0,)),
+                Expanded(child: Image(image: AssetImage("images/krishnaimage.jpg"),width: 120.0,)),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.star),
+                Icon(Icons.star),
+                Icon(Icons.star),
+                Icon(Icons.star_border),
+                Icon(Icons.star_border),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  children : [
+                  Icon(Icons.phone, size: 30.0),
+                  Text("PHONE")
+                  ],
+                ),
+                Column(
+                  children : [
+                    Icon(Icons.alt_route, size: 30.0),
+                    Text("ROUTE")
+                  ],
+                ),
+                Column(
+                  children : [
+                    Icon(Icons.share, size: 30.0),
+                    Text("SHARE")
+                  ],
+                )
+
+              ],
+            ),
           ],
         ),
       ),
