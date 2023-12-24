@@ -3,58 +3,92 @@ import 'package:flutter/material.dart';
 class AppBarr extends StatelessWidget {
   const AppBarr({super.key});
 
-  static const List<String> products = ["SOFA", "BED", "CHAIR"];
-  static const List<String> productDetails = [
-    "6-face Sofa",
-    "Master Bed",
-    "4-Person Chair"
-  ];
-  static const List<num> price = [8000.0, 5000.0, 2000.0];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("NAVIGATION DRAWER")),
-      drawer: Drawer(
-        elevation: 200.0,
-        child: ListView(
-          children: [
-            UserAccountsDrawerHeader(
-              accountEmail: Text("hari.prem24@gmail.com"),
-              accountName: Text("HARI PREM R C"),
-              margin: EdgeInsets.all(0.0),
-              currentAccountPicture: CircleAvatar(foregroundImage: AssetImage("images/myimage.jpg"),),
-              otherAccountsPictures: [
-                CircleAvatar(foregroundImage: AssetImage("images/krishnaimage.jpg"),),
-                CircleAvatar(foregroundImage: AssetImage("images/pokemonimage.jpg"),),
-              ],
-            ),
-            ListTile(leading: Icon(Icons.home),title: Text("HOME"), onTap: (){},),
-            ListTile(leading: Icon(Icons.shopping_cart),title: Text("SHOP"), onTap: (){},),
-            ListTile(leading: Icon(Icons.favorite),title: Text("FAVORITE"), onTap: (){},),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text("LABELS"),
-            ),
-            ListTile(leading: Icon(Icons.label_important),title: Text("RED"), onTap: (){},),
-            ListTile(leading: Icon(Icons.label_important),title: Text("BLUE"), onTap: (){},),
-            ListTile(leading: Icon(Icons.label_important),title: Text("GREEN"), onTap: (){},),
-          ],
-        ),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text("FLOATING ACTION BAR",style: TextStyle(color: Colors.white),),
+        centerTitle: true,
+        backgroundColor: Colors.black,
       ),
-      body: Container(
-        child: ListView.builder(
-          itemCount: products.length,
-          itemExtent: 100.0,
-          itemBuilder: (context, index) {
-            return ListTile(
-              leading: CircleAvatar(child: Text(products[index][0])),
-              title: Text(products[index]),
-              subtitle: Text(productDetails[index]),
-              trailing: Text(price[index].toString()),
-              onTap: () {},
-            );
-          },
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
+        backgroundColor: Colors.grey,
+        foregroundColor: Colors.black,
+        elevation: 5.0,
+        mini: true,
+        //   shape: BeveledRectangleBorder(
+        //     borderRadius: BorderRadius.circular(1.0),
+        //     side: BorderSide(color: Colors.black, width: 1.0),
+        // ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        notchMargin: 5.0,
+        shape: CircularNotchedRectangle(),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: 0.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.home),
+                  Text("Home"),
+                ],
+              ),
+            ),
+            Padding(
+              padding:
+              const EdgeInsets.only(right: 150.0,left: 60.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.shopping_cart,
+                   // color: Colors.white,
+                  ),
+                  Text(
+                    "Shop",
+                    //style: TextStyle(color: Colors.white),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding:
+              const EdgeInsets.only(left: 0.0,right: 20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.favorite,
+                  ),
+                  Text(
+                    "Fav",)
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 0.0,left: 40.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.settings,
+                    //color: Colors.white,
+                  ),
+                  Text(
+                    "Setting",
+                  )
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
