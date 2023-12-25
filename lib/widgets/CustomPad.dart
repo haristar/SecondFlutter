@@ -30,7 +30,7 @@ class CustomPad extends StatelessWidget {
         leading: Icon(leadingicon,color: Colors.blue,),
         title: Text(title),
         subtitle: Text(subtitle),
-        trailing: Icon(trailingicon,),
+        trailing: Icon(trailingicon,),onTap: (){},
       ),
     );
   }
