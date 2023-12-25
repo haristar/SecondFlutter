@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MyDetails extends StatelessWidget {
-  const MyDetails({super.key});
+  MyDetails({super.key, required this.productName});
+  String productName;
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +14,14 @@ class MyDetails extends StatelessWidget {
           Navigator.pop(context);
         }, icon: Icon(Icons.arrow_back),),
       ),
-      body: Container(
-        child: Center(
-          child: Text("Details Form"),
-        ),
+      body: ListView(
+        children: [
+          ListTile(
+            leading: Icon(Icons.chat_bubble),
+            title: Text(productName),
+            trailing: Icon(Icons.done),
+          ),
+        ],
       ),
     );
   }
