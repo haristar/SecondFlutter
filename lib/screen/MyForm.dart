@@ -15,6 +15,12 @@ class _MyFormState extends State<MyForm> {
   bool? checkbox = false;
   bool? checkboxlist = false;
 
+  final dropdownlist = ["S", "M", "L", "XL", "XXL", "XXXL"];
+  String? selectedval;
+  _MyFormState(){
+    selectedval = dropdownlist[0];
+  }
+
   ProductType? prodType;
 
   //
@@ -128,7 +134,7 @@ class _MyFormState extends State<MyForm> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
-                      onChanged: (val){
+                      onChanged: (val) {
                         setState(() {
                           prodType = val;
                         });
@@ -145,14 +151,43 @@ class _MyFormState extends State<MyForm> {
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                       tileColor: Colors.indigo.shade50,
-                      onChanged: (val){
+                      onChanged: (val) {
                         setState(() {
                           prodType = val;
                         });
-                  
                       }),
                 ),
               ],
+            ),
+            // DropdownButton(
+            //   value: selectedval,
+            //     items: dropdownlist.map(
+            //             (e) =>  DropdownMenuItem(child : Text(e),value : e)
+            //     ).toList(),
+            //     onChanged: (val) {
+            //       setState(() {
+            //         selectedval = val;
+            //       });
+            //     }),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: DropdownButtonFormField(
+                  value: selectedval,
+                  items: dropdownlist.map(
+                          (e) =>  DropdownMenuItem(child : Text(e),value : e)
+                  ).toList(),
+                  onChanged: (val) {
+                    setState(() {
+                      selectedval = val;
+                    });
+                  },
+                icon: Icon(Icons.arrow_drop_down_circle),
+                decoration: InputDecoration(
+                  label: Text("Size"),
+                  prefixIcon: Icon(Icons.accessibility_new_rounded),
+                  border: UnderlineInputBorder(),
+                ),
+              ),
             ),
 
             // Padding(
@@ -188,3 +223,4 @@ class _MyFormState extends State<MyForm> {
     );
   }
 }
+
