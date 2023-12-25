@@ -14,6 +14,6 @@ class MyApp extends StatelessWidget {
         title: "Third App",
         themeMode: ThemeMode.system,
         debugShowCheckedModeBanner: false,
-        home: AppBarr());
+        home: Home());
   }
 }
