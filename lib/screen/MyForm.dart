@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_second_application/screen/MyDetails.dart';
 
+enum ProductType { DOWNLOADABLE, DELIVERABLE }
+
 class MyForm extends StatefulWidget {
   const MyForm({super.key});
 
@@ -12,6 +14,8 @@ class _MyFormState extends State<MyForm> {
   var productName, productDetails, checkboxdetail;
   bool? checkbox = false;
   bool? checkboxlist = false;
+
+  ProductType? prodType;
 
   //
   // void updateText(val){
@@ -104,12 +108,53 @@ class _MyFormState extends State<MyForm> {
               onChanged: (val) {
                 setState(() {
                   checkboxlist = val;
-                  if(checkboxlist==true) checkboxdetail="1";
-                  else if(checkboxlist==false || checkboxlist==null) checkboxdetail="0";
+                  if (checkboxlist == true)
+                    checkboxdetail = "1";
+                  else if (checkboxlist == false || checkboxlist == null)
+                    checkboxdetail = "0";
                 });
               },
               controlAffinity: ListTileControlAffinity.leading,
             ),
+            Row(
+              children: [
+                Expanded(
+                  child: RadioListTile<ProductType>(
+                      value: ProductType.DOWNLOADABLE,
+                      groupValue: prodType,
+                      dense: true,
+                      tileColor: Colors.indigo.shade50,
+                      title: Text(ProductType.DOWNLOADABLE.name.toLowerCase()),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      onChanged: (val){
+                        setState(() {
+                          prodType = val;
+                        });
+                      }),
+                ),
+                SizedBox(width: 5.0),
+                Expanded(
+                  child: RadioListTile<ProductType>(
+                      value: ProductType.DELIVERABLE,
+                      title: Text(ProductType.DELIVERABLE.name.toLowerCase()),
+                      groupValue: prodType,
+                      dense: true,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      tileColor: Colors.indigo.shade50,
+                      onChanged: (val){
+                        setState(() {
+                          prodType = val;
+                        });
+                  
+                      }),
+                ),
+              ],
+            ),
+
             // Padding(
             //   padding: const EdgeInsets.all(8.0),
             //   child: Text("Product Name = ${productController.text}"),
