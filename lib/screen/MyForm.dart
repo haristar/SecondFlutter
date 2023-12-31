@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_second_application/screen/MyDetails.dart';
 
+import '../models/ProductModel.dart';
+import '/widgets/MyButton.dart';
+
 enum ProductType { DOWNLOADABLE, DELIVERABLE }
 
 class MyForm extends StatefulWidget {
@@ -17,7 +20,10 @@ class _MyFormState extends State<MyForm> {
 
   final dropdownlist = ["S", "M", "L", "XL", "XXL", "XXXL"];
   String? selectedval;
-  _MyFormState(){
+
+  final formkey = GlobalKey<FormState>();
+
+  _MyFormState() {
     selectedval = dropdownlist[0];
   }
 
@@ -71,156 +77,169 @@ class _MyFormState extends State<MyForm> {
               style: TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold),
             ),
 
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: TextFormField(
-                controller: productController,
-                onChanged: (val) {
-                  // updateText(val);
-                },
-                decoration: InputDecoration(
-                  labelText: "Product Name",
-                  prefixIcon: Icon(Icons.person_2_outlined),
-                  border: OutlineInputBorder(),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: TextFormField(
-                controller: productController1,
-                onChanged: (val) {
-                  //updateText(val);
-                },
-                decoration: InputDecoration(
-                  labelText: "Product Details",
-                  prefixIcon: Icon(Icons.person_2_outlined),
-                  border: OutlineInputBorder(),
-                ),
-              ),
-            ),
-            // Checkbox(
-            //     tristate: true,
-            //     value: checkbox,
-            //     onChanged: (val) {
-            //       setState(() {
-            //         checkbox = val;
-            //       });
-            //     }),
-            CheckboxListTile(
-              tristate: true,
-              title: Text("Premium Products"),
-              value: checkboxlist,
-              onChanged: (val) {
-                setState(() {
-                  checkboxlist = val;
-                  if (checkboxlist == true)
-                    checkboxdetail = "1";
-                  else if (checkboxlist == false || checkboxlist == null)
-                    checkboxdetail = "0";
-                });
-              },
-              controlAffinity: ListTileControlAffinity.leading,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: RadioListTile<ProductType>(
-                      value: ProductType.DOWNLOADABLE,
-                      groupValue: prodType,
-                      dense: true,
-                      tileColor: Colors.indigo.shade50,
-                      title: Text(ProductType.DOWNLOADABLE.name.toLowerCase()),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.0),
+            Form(
+                key: formkey,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: TextFormField(
+                        validator: (value){
+                          if(value==null || value.isEmpty){
+                            return "Please enter some text";
+                          }else null;
+                        },
+                        controller: productController,
+                        onChanged: (val) {
+                          // updateText(val);
+                        },
+                        decoration: InputDecoration(
+                          labelText: "Product Name",
+                          prefixIcon: Icon(Icons.person_2_outlined),
+                          border: OutlineInputBorder(),
+                        ),
                       ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: TextFormField(
+                        validator: (value){
+                          if(value==null || value.isEmpty){
+                            return "Please enter some text";
+                          }else null;
+                        },
+                        controller: productController1,
+                        onChanged: (val) {
+                          //updateText(val);
+                        },
+                        decoration: InputDecoration(
+                          labelText: "Product Details",
+                          prefixIcon: Icon(Icons.person_2_outlined),
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                    // Checkbox(
+                    //     tristate: true,
+                    //     value: checkbox,
+                    //     onChanged: (val) {
+                    //       setState(() {
+                    //         checkbox = val;
+                    //       });
+                    //     }),
+                    CheckboxListTile(
+                      tristate: true,
+                      title: Text("Premium Products"),
+                      value: checkboxlist,
                       onChanged: (val) {
                         setState(() {
-                          prodType = val;
+                          checkboxlist = val;
+                          if (checkboxlist == true)
+                            checkboxdetail = "1";
+                          else if (checkboxlist == false || checkboxlist == null)
+                            checkboxdetail = "0";
                         });
-                      }),
-                ),
-                SizedBox(width: 5.0),
-                Expanded(
-                  child: RadioListTile<ProductType>(
-                      value: ProductType.DELIVERABLE,
-                      title: Text(ProductType.DELIVERABLE.name.toLowerCase()),
-                      groupValue: prodType,
-                      dense: true,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.0),
+                      },
+                      controlAffinity: ListTileControlAffinity.leading,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: RadioListTile<ProductType>(
+                              value: ProductType.DOWNLOADABLE,
+                              groupValue: prodType,
+                              dense: true,
+                              tileColor: Colors.indigo.shade50,
+                              title: Text(ProductType.DOWNLOADABLE.name.toLowerCase()),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              onChanged: (val) {
+                                setState(() {
+                                  prodType = val;
+                                });
+                              }),
+                        ),
+                        SizedBox(width: 5.0),
+                        Expanded(
+                          child: RadioListTile<ProductType>(
+                              value: ProductType.DELIVERABLE,
+                              title: Text(ProductType.DELIVERABLE.name.toLowerCase()),
+                              groupValue: prodType,
+                              dense: true,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              tileColor: Colors.indigo.shade50,
+                              onChanged: (val) {
+                                setState(() {
+                                  prodType = val;
+                                });
+                              }),
+                        ),
+                      ],
+                    ),
+                    // DropdownButton(
+                    //   value: selectedval,
+                    //     items: dropdownlist.map(
+                    //             (e) =>  DropdownMenuItem(child : Text(e),value : e)
+                    //     ).toList(),
+                    //     onChanged: (val) {
+                    //       setState(() {
+                    //         selectedval = val;
+                    //       });
+                    //     }),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: DropdownButtonFormField(
+                        value: selectedval,
+                        items: dropdownlist
+                            .map((e) => DropdownMenuItem(child: Text(e), value: e))
+                            .toList(),
+                        onChanged: (val) {
+                          setState(() {
+                            selectedval = val;
+                          });
+                        },
+                        icon: Icon(Icons.arrow_drop_down_circle),
+                        decoration: InputDecoration(
+                          label: Text("Size"),
+                          prefixIcon: Icon(Icons.accessibility_new_rounded),
+                          border: UnderlineInputBorder(),
+                        ),
                       ),
-                      tileColor: Colors.indigo.shade50,
-                      onChanged: (val) {
-                        setState(() {
-                          prodType = val;
-                        });
-                      }),
-                ),
-              ],
-            ),
-            // DropdownButton(
-            //   value: selectedval,
-            //     items: dropdownlist.map(
-            //             (e) =>  DropdownMenuItem(child : Text(e),value : e)
-            //     ).toList(),
-            //     onChanged: (val) {
-            //       setState(() {
-            //         selectedval = val;
-            //       });
-            //     }),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: DropdownButtonFormField(
-                  value: selectedval,
-                  items: dropdownlist.map(
-                          (e) =>  DropdownMenuItem(child : Text(e),value : e)
-                  ).toList(),
-                  onChanged: (val) {
-                    setState(() {
-                      selectedval = val;
-                    });
-                  },
-                icon: Icon(Icons.arrow_drop_down_circle),
-                decoration: InputDecoration(
-                  label: Text("Size"),
-                  prefixIcon: Icon(Icons.accessibility_new_rounded),
-                  border: UnderlineInputBorder(),
-                ),
-              ),
-            ),
+                    ),
 
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: Text("Product Name = ${productController.text}"),
-            // ),
-            Padding(
-              padding: const EdgeInsets.all(50.0),
-              child: mySubmitBtn(context),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: Text("Product Name = ${productController.text}"),
+                    // ),
+                    Padding(
+                      padding: const EdgeInsets.all(50.0),
+                      child: MyButton(onPress: () {
+                        if(formkey.currentState!.validate()){
+
+                          ProductDetails product = ProductDetails();
+
+                          product.productname = productController.text;
+                          product.productdetails = productController1.text;
+                          product.isTopproduct = checkboxlist!;
+                          //product.producttype = prodType;
+                          product.productsize = selectedval!;
+
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                            return MyDetails(productname : product.productname,
+                              productdetails: product.productdetails,);
+                          }));
+                        }
+                      },),
+                    ),
+                  ],
+                ),
             ),
           ],
         ),
       ),
     );
   }
-
-  OutlinedButton mySubmitBtn(BuildContext context) {
-    return OutlinedButton(
-      child: Text(
-        "submit form".toUpperCase(),
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      style: OutlinedButton.styleFrom(minimumSize: Size(200, 50)),
-      onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return MyDetails(
-            productName: productController.text,
-            productDetails: productController1.text,
-            checkboxdetails: checkboxdetail,
-          );
-        }));
-      },
-    );
-  }
 }
-

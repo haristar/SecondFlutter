@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_second_application/models/ProductModel.dart';
 
 class MyDetails extends StatelessWidget {
-  MyDetails({super.key, required this.productName, required this.productDetails, required this.checkboxdetails});
-  String productName, productDetails,checkboxdetails;
+  MyDetails({super.key, required this.productname, required this.productdetails});
+  String productname, productdetails;
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +19,8 @@ class MyDetails extends StatelessWidget {
         children: [
           ListTile(
             leading: Icon(Icons.chat_bubble),
-            title: Text(productName),
-            subtitle: Text(productDetails),
-            trailing:
-            (checkboxdetails=="0") ? Icon(Icons.done) : Icon(Icons.workspace_premium),
+            title: Text(productname),
+            subtitle: Text(productdetails),
           ),
         ],
       ),
